@@ -1,0 +1,288 @@
+:root {
+    --vermelho: #c81e3a;
+    --vermelho-escuro: #9f1630;
+    --azul: #17263c;
+    --verde: #278c7b;
+    --fundo: #f4f6f8;
+    --texto: #1f2937;
+    --borda: #d9dee7;
+    --branco: #ffffff;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--fundo);
+    color: var(--texto);
+}
+
+a {
+    color: var(--azul);
+}
+
+.topo {
+    background: var(--azul);
+    color: white;
+    padding: 16px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.marca {
+    color: white;
+    font-size: 1.35rem;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.topo nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.topo nav a {
+    color: white;
+    text-decoration: none;
+}
+
+.container {
+    width: min(1100px, 92%);
+    margin: 28px auto;
+    min-height: 75vh;
+}
+
+.cartao {
+    background: var(--branco);
+    border: 1px solid var(--borda);
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow:
+        0 4px 18px rgba(15, 23, 42, .06);
+}
+
+.login-caixa {
+    max-width: 460px;
+    margin: 60px auto;
+}
+
+h1 {
+    color: var(--azul);
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+    margin: 8px 0 6px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 11px;
+    border: 1px solid #b9c2cf;
+    border-radius: 7px;
+    font-size: 1rem;
+}
+
+button,
+.botao {
+    border: 0;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    padding: 11px 16px;
+    border-radius: 7px;
+    font-weight: bold;
+}
+
+.primario {
+    background: var(--vermelho);
+    color: white;
+}
+
+.primario:hover {
+    background: var(--vermelho-escuro);
+}
+
+.secundario {
+    background: var(--verde);
+    color: white;
+}
+
+.claro {
+    background: #e9edf3;
+    color: var(--azul);
+}
+
+.login-caixa button {
+    width: 100%;
+    margin-top: 18px;
+}
+
+.cabecalho-pagina {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filtros {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1.5fr auto auto;
+    align-items: end;
+    gap: 12px;
+    margin-bottom:
+        20px;
+}
+
+.tabela-responsiva {
+    overflow-x: auto;
+    padding: 0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    text-align: left;
+    padding: 14px;
+    border-bottom: 1px solid var(--borda);
+}
+
+th {
+    background: #edf1f5;
+    color: var(--azul);
+}
+
+.acoes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.acoes form {
+    margin: 0;
+}
+
+.link-perigo {
+    color: var(--vermelho);
+    background: none;
+    padding: 0;
+}
+
+.tipo {
+    background: #ffe4e9;
+    color: var(--vermelho-escuro);
+    border-radius: 999px;
+    padding: 5px 9px;
+    font-weight: bold;
+}
+
+.grande {
+    font-size: 1.1rem;
+}
+
+.grade-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px 18px;
+}
+
+.campo-largo {
+    grid-column: 1 / -1;
+}
+
+.consentimento {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-weight: normal;
+}
+
+.consentimento input {
+    width: auto;
+    margin-top: 3px;
+}
+
+.botoes {
+    display: flex;
+    gap: 10px;
+}
+
+.alerta {
+    padding: 12px 16px;
+    border-radius: 7px;
+    margin-bottom: 14px;
+}
+
+.sucesso {
+    background: #dff7ef;
+    color: #155e52;
+}
+
+.erro {
+    background: #ffe4e9;
+    color: #8f1730;
+}
+
+.detalhes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+}
+
+.detalhes div {
+    border-bottom: 1px solid var(--borda);
+    padding: 10px 0;
+}
+
+dt {
+    font-weight: bold;
+    color: #64748b;
+}
+
+dd {
+    margin: 5px 0 0;
+}
+
+footer {
+    text-align: center;
+    padding: 24px;
+    color: #64748b;
+}
+
+@media (max-width: 760px) {
+
+    .filtros,
+    .grade-formulario,
+    .detalhes {
+        grid-template-columns: 1fr;
+    }
+
+    .campo-largo {
+        grid-column: auto;
+    }
+
+    .cabecalho-pagina {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .acoes {
+        min-width: 180px;
+    }
+}

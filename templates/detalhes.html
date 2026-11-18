@@ -1,0 +1,18 @@
+{% block titulo %}Detalhes{% endblock %}
+{% block conteudo %}
+<section class="cartao">
+<div class="cabecalho-pagina">
+    <div><h1>{{ doador.nome }}</h1><span class="tipo grande">{{ doador.tipo_sanguineo }}</span></div>
+    <a class="botao secundario" href="{{ url_for('editar_doador', id_doador=doador.id_doador) }}">Editar</a>
+</div>
+    <dl class="detalhes">
+        <div><dt>Nascimento</dt><dd>{{ doador.data_nascimento.strftime('%d/%m/%Y') }}</dd></div>
+        <div><dt>Telefone</dt><dd>{{ doador.telefone }}</dd></div>
+        <div><dt>E-mail</dt><dd>{{ doador.email or 'Não informado' }}</dd></div>
+        <div><dt>Cidade</dt><dd>{{ doador.cidade }}/{{ doador.estado }}</dd></div>
+        <div><dt>Última doação</dt><dd>{{ doador.ultima_doacao.strftime('%d/%m/%Y') if doador.ultima_doacao else'Não informada' }}</dd></div>
+        <div><dt>Consentimento</dt><dd>{{ 'Sim' if doador.consentimento else 'Não' }}</dd></div>
+    </dl>
+<a href="{{ url_for('listar_doadores') }}">← Voltar para a lista</a>
+</section>
+{% endblock %}
