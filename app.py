@@ -9,11 +9,13 @@ from flask import (
 from werkzeug.security import check_password_hash
 
 from banco import obter_conexao
+from rotas_prototipo import prototipo_bp
 
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'chave-apenas-para-desenvolvimento')
+app.register_blueprint(prototipo_bp)
 
 TIPOS_SANGUINEOS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']
 
