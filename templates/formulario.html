@@ -1,58 +1,59 @@
 {% extends 'base.html' %}
-{% block titulo %}{{ titulo }}{% endblock %}
+{% block titulo %}{{ titulo }} | DoaSangue{% endblock %}
 {% block conteudo %}
 <section class="cartao">
-<h1>{{ titulo }}</h1>
-<form method="post" class="grade-formulario">
-    <div class="campo-largo">
-        <label for="nome">Nome completo *</label>
-        <input id="nome" name="nome" maxlength="120" required value="{{ doador.nome if doador else '' }}">
+    <div class="cabecalho-pagina">
+        <div>
+            <h1>{{ titulo }}</h1>
+            <p>Os campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+        </div>
     </div>
-    <div>
-        <label for="data_nascimento">Data de nascimento *</label>
-        <input id="data_nascimento" name="data_nascimento" type="date" required 
-value="{{ doador.data_nascimento if doador else '' }}">
-    </div>
-    <div>
-        <label for="tipo_sanguineo">Tipo sanguíneo *</label>
-        <select id="tipo_sanguineo" name="tipo_sanguineo" required>
-            <option value="">Selecione</option>
-            {% for tipo in tipos %}<option value="{{ tipo }}" {% if doador and doador.tipo_sanguineo == tipo %}
-selected{% endif %}>{{ tipo }}</option>{% endfor %}
-        </select>
-    </div>
-    <div>
-        <label for="telefone">Telefone *</label>
-        <input id="telefone" name="telefone" maxlength="20" required value="{{ doador.telefone if doador else 
-'' }}">
-    </div>
-    <div>
-        <label for="email">E-mail</label>
-        <input id="email" name="email" type="email" maxlength="150" value="{{ doador.email if doador and 
-doador.email else '' }}">
-    </div>
-    <div>
-        <label for="cidade">Cidade *</label>
-        <input id="cidade" name="cidade" maxlength="100" required value="{{ doador.cidade if doador else '' }}">
-    </div>
-    <div>
-        <label for="estado">UF *</label>
-        <input id="estado" name="estado" maxlength="2" required value="{{ doador.estado if doador else 'PI' }}">
-    </div>
-    <div>
-        <label for="ultima_doacao">Última doação</label>
-        <input id="ultima_doacao" name="ultima_doacao" type="date" value="{{ doador.ultima_doacao if doador and 
-doador.ultima_doacao else '' }}">
-    </div>
-    <label class="consentimento campo-largo">
-        <input name="consentimento" type="checkbox" {% if doador and doador.consentimento %}checked{% endif 
-%} required>
-        O titular autorizou o tratamento dos dados para a finalidade informada. *
-    </label>
-    <div class="campo-largo botoes">
-        <button class="botao primario" type="submit">Salvar</button>
-        <a class="botao claro" href="{{ url_for('listar_doadores') }}">Cancelar</a>
-    </div>
-</form>
+    <form method="post" class="grade-formulario">
+        <div class="campo-largo">
+            <label for="nome">Nome completo <span class="obrigatorio">*</span></label>
+            <input id="nome" name="nome" maxlength="120" required value="{{ doador.nome if doador else '' }}">
+        </div>
+        <div>
+            <label for="data_nascimento">Data de nascimento <span class="obrigatorio">*</span></label>
+            <input id="data_nascimento" name="data_nascimento" type="date" required value="{{ doador.data_nascimento if doador else '' }}">
+        </div>
+        <div>
+            <label for="tipo_sanguineo">Tipo sanguíneo <span class="obrigatorio">*</span></label>
+            <select id="tipo_sanguineo" name="tipo_sanguineo" required>
+                <option value="">Selecione</option>
+                {% for tipo in tipos %}
+                <option value="{{ tipo }}" {% if doador and doador.tipo_sanguineo == tipo %}selected{% endif %}>{{ tipo }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label for="telefone">Telefone <span class="obrigatorio">*</span></label>
+            <input id="telefone" name="telefone" maxlength="20" required value="{{ doador.telefone if doador else '' }}">
+        </div>
+        <div>
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" maxlength="150" value="{{ doador.email if doador and doador.email else '' }}">
+        </div>
+        <div>
+            <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
+            <input id="cidade" name="cidade" maxlength="100" required value="{{ doador.cidade if doador else '' }}">
+        </div>
+        <div>
+            <label for="estado">UF <span class="obrigatorio">*</span></label>
+            <input id="estado" name="estado" maxlength="2" required value="{{ doador.estado if doador else 'PI' }}">
+        </div>
+        <div>
+            <label for="ultima_doacao">Última doação</label>
+            <input id="ultima_doacao" name="ultima_doacao" type="date" value="{{ doador.ultima_doacao if doador and doador.ultima_doacao else '' }}">
+        </div>
+        <label class="consentimento campo-largo">
+            <input name="consentimento" type="checkbox" {% if doador and doador.consentimento %}checked{% endif %} required>
+            O titular autorizou o tratamento dos dados para a finalidade informada. <span class="obrigatorio">*</span>
+        </label>
+        <div class="campo-largo botoes">
+            <button class="botao primario" type="submit">Salvar</button>
+            <a class="botao claro" href="{{ url_for('listar_doadores') }}">Cancelar</a>
+        </div>
+    </form>
 </section>
 {% endblock %}

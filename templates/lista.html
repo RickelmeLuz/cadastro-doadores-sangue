@@ -28,13 +28,11 @@ Doadores | DoaSangue
 <section class="cartao filtros-cartao">
 
     <div class="titulo-secao">
-        <div>
-            <h2>Pesquisar doadores</h2>
+        <h2>Pesquisar doadores</h2>
 
-            <p>
-                Preencha um ou mais campos para filtrar os registros.
-            </p>
-        </div>
+        <p>
+            Preencha um ou mais campos para filtrar os registros.
+        </p>
     </div>
 
     <form class="filtros" method="get">
@@ -46,15 +44,13 @@ Doadores | DoaSangue
         </div>
 
         <div class="campo">
-            <label for="tipo_sanguineo">
-                Tipo sanguíneo
-            </label>
+            <label for="tipo_sanguineo">Tipo sanguíneo</label>
 
             <select id="tipo_sanguineo" name="tipo_sanguineo">
                 <option value="">Todos os tipos</option>
 
                 {% for tipo in tipos %}
-                <option value="{{ tipo }}" {% if filtros.tipo==tipo %} selected {% endif %}>
+                <option value="{{ tipo }}" {% if filtros.tipo == tipo %}selected{% endif %}>
                     {{ tipo }}
                 </option>
                 {% endfor %}
@@ -85,19 +81,17 @@ Doadores | DoaSangue
 <section class="cartao tabela-cartao">
 
     <div class="titulo-tabela">
-        <div>
-            <h2>Cadastros encontrados</h2>
+        <h2>Cadastros encontrados</h2>
 
-            <p>
-                {{ doadores|length }}
+        <p>
+            {{ doadores|length }}
 
-                {% if doadores|length == 1 %}
-                doador encontrado
-                {% else %}
-                doadores encontrados
-                {% endif %}
-            </p>
-        </div>
+            {% if doadores|length == 1 %}
+            doador encontrado
+            {% else %}
+            doadores encontrados
+            {% endif %}
+        </p>
     </div>
 
     <div class="tabela-responsiva">
@@ -105,11 +99,11 @@ Doadores | DoaSangue
         <table>
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Telefone</th>
-                    <th>Cidade/UF</th>
-                    <th class="coluna-acoes">Ações</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Telefone</th>
+                    <th scope="col">Cidade/UF</th>
+                    <th scope="col" class="coluna-acoes">Ações</th>
                 </tr>
             </thead>
 
@@ -120,7 +114,7 @@ Doadores | DoaSangue
                 <tr>
                     <td>
                         <div class="doador-nome">
-                            <span class="avatar">
+                            <span class="avatar" aria-hidden="true">
                                 {{ doador.nome[0]|upper }}
                             </span>
 
@@ -146,33 +140,25 @@ Doadores | DoaSangue
                         {{ doador.cidade }}/{{ doador.estado }}
                     </td>
 
-                    <td class="acoes">
+                    <td>
+                        <div class="acoes">
 
-                        <a class="acao visualizar" href="{{ url_for(
-                                    'detalhes_doador',
-                                    id_doador=doador.id_doador
-                                ) }}">
-                            Ver
-                        </a>
+                            <a class="acao visualizar" href="{{ url_for('detalhes_doador', id_doador=doador.id_doador) }}">
+                                Ver
+                            </a>
 
-                        <a class="acao editar" href="{{ url_for(
-                                    'editar_doador',
-                                    id_doador=doador.id_doador
-                                ) }}">
-                            Editar
-                        </a>
+                            <a class="acao editar" href="{{ url_for('editar_doador', id_doador=doador.id_doador) }}">
+                                Editar
+                            </a>
 
-                        <form method="post" action="{{ url_for(
-                                    'excluir_doador',
-                                    id_doador=doador.id_doador
-                                ) }}" onsubmit="return confirm(
-                                    'Tem certeza que deseja excluir este doador?'
-                                );">
-                            <button class="acao excluir" type="submit">
-                                Excluir
-                            </button>
-                        </form>
+                            <form method="post" action="{{ url_for('excluir_doador', id_doador=doador.id_doador) }}"
+                                onsubmit="return confirm('Tem certeza que deseja excluir este doador?');">
+                                <button class="acao excluir" type="submit">
+                                    Excluir
+                                </button>
+                            </form>
 
+                        </div>
                     </td>
                 </tr>
 
@@ -182,7 +168,9 @@ Doadores | DoaSangue
                     <td colspan="5">
 
                         <div class="estado-vazio">
-                            <div class="gota">♥</div>
+                            <div class="gota">
+                                <img src="{{ url_for('static', filename='img/gotinha.svg') }}" alt="" width="72" height="84">
+                            </div>
 
                             <h3>Nenhum doador encontrado</h3>
 

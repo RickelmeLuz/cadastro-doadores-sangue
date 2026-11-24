@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>
@@ -12,22 +11,31 @@
         {% endblock %}
     </title>
 
+    <link rel="icon" href="{{ url_for('static', filename='img/gotinha.svg') }}" type="image/svg+xml">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block css_extra %}{% endblock %}
 </head>
 
 <body>
+    <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteúdo</a>
+
     <header class="topo">
 
         <div class="topo-conteudo">
 
-            <a class="marca" href="{{ url_for('inicio') }}">
-                <span class="marca-icone">♥</span>
-                DoaSangue
+            <a class="marca" href="{{ url_for('site.inicio') }}">
+                <span class="marca-icone" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" focusable="false">
+                        <path d="M12 2.5C12 2.5 5 10 5 14.5a7 7 0 0014 0C19 10 12 2.5 12 2.5z" fill="currentColor" />
+                    </svg>
+                </span>
+                <span><span class="marca-doa">Doa</span>Sangue</span>
             </a>
 
-            {% if session.get('admin_id') %}
+            {% block navegacao %}
+            <nav class="navegacao" aria-label="Principal">
 
-            <nav class="navegacao">
+                {% if session.get('admin_id') %}
 
                 <span class="usuario">
                     Olá, {{ session.get('admin_nome') }}
@@ -45,16 +53,27 @@
                     Sair
                 </a>
 
-            </nav>
+                {% else %}
 
-            {% endif %}
+                <a href="{{ url_for('site.inicio') }}">
+                    Início
+                </a>
+
+                <a class="sair" href="{{ url_for('login') }}">
+                    Entrar
+                </a>
+
+                {% endif %}
+
+            </nav>
+            {% endblock %}
 
         </div>
 
     </header>
 
 
-    <main class="container">
+    <main class="container" id="conteudo-principal">
 
         {% with mensagens = get_flashed_messages(with_categories=true) %}
 
@@ -62,7 +81,7 @@
 
         {% for categoria, mensagem in mensagens %}
 
-        <div class="alerta {{ categoria }}">
+        <div class="alerta {{ categoria }}" role="{{ 'alert' if categoria == 'erro' else 'status' }}">
             {{ mensagem }}
         </div>
 
@@ -75,7 +94,7 @@
 
         {% if erro_geral %}
 
-        <div class="alerta erro">
+        <div class="alerta erro" role="alert">
             {{ erro_geral }}
         </div>
 
@@ -89,9 +108,11 @@
 
 
     <footer class="rodape">
+        {% block rodape %}
         <p>
-            Cadastro de Doadores de Sangue
+            DoaSangue · Cadastro de Doadores de Sangue
         </p>
+        {% endblock %}
     </footer>
 
 </body>
