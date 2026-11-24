@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
-{% block titulo %}Protótipo | DoaSangue{% endblock %}
+{% block titulo %}Início | DoaSangue{% endblock %}
 {% block conteudo %}
-{# Página provisória da Etapa 2. A página inicial real será criada na Etapa 5. #}
-<section class="cartao">
-    <h1>Protótipo em construção</h1>
-    <p>Esta é a estrutura inicial do protótipo visual da plataforma de doadores de sangue.</p>
-    <p>Todos os dados exibidos no protótipo são fictícios.</p>
+<section class="cartao" style="text-align: center;">
+    <img src="{{ url_for('static', filename='img/gotinha.svg') }}" alt="Gotinha, mascote da plataforma DoaSangue" width="120" height="140">
+    <h1>Doe sangue. Compartilhe vida.</h1>
+    <p>A página inicial completa será montada nas próximas etapas.</p>
 </section>
 {% endblock %}
