@@ -1,0 +1,34 @@
+{# Componente: cartão de campanha. Espera a variável "campanha". #}
+{% from 'componentes/status.html' import status_campanha %}
+<article class="cartao">
+    <div class="card-topo">
+        <span class="etiqueta">
+            {% if campanha.tipo_prioritario %}Prioridade: {{ campanha.tipo_prioritario }}{% else %}Todos os tipos sanguíneos.{% endif %}
+        </span>
+        {{ status_campanha(campanha.status) }}
+    </div>
+
+    <h3>{{ campanha.nome }}</h3>
+    <p class="texto-secundario">{{ campanha.descricao }}</p>
+
+    <ul class="lista-dados">
+        <li><strong>Período:</strong> {{ campanha.data_inicio }} a {{ campanha.data_fim }}</li>
+        <li><strong>Local:</strong> {{ campanha.local }}, {{ campanha.cidade }}/{{ campanha.estado }}</li>
+        <li><strong>Vagas:</strong> {{ campanha.vagas }}</li>
+    </ul>
+
+    {% if campanha.parceiro %}
+    <div class="parceiro-resumo">
+        <span class="etiqueta destaque">Parceiro</span>
+        <strong>{{ campanha.parceiro.nome }}</strong>
+        <span>Benefício promocional divulgado pelo parceiro. Consulte regras e disponibilidade no local de coleta.</span>
+    </div>
+    {% endif %}
+
+    <div class="card-acoes">
+        <a class="botao secundario" href="{{ url_for('site.campanha_detalhe', id_campanha=campanha.id) }}">Ver campanha</a>
+        {% if campanha.status in ['ATIVA', 'APROVADA'] %}
+        <a class="botao primario" href="{{ url_for('site.autocadastro') }}">Tenho interesse</a>
+        {% endif %}
+    </div>
+</article>

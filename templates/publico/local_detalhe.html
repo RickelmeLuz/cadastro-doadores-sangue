@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% from 'componentes/status.html' import status_local %}
+{% block titulo %}{{ local.nome }} | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cartao">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Local de coleta</span>
+            <h1>{{ local.nome }}</h1>
+        </div>
+        {{ status_local(local.status) }}
+    </div>
+
+    <dl class="detalhes">
+        <div><dt>Endereço</dt><dd>{{ local.endereco }}</dd></div>
+        <div><dt>Cidade/UF</dt><dd>{{ local.cidade }}/{{ local.estado }}</dd></div>
+        <div><dt>Telefone</dt><dd>{{ local.telefone }}</dd></div>
+        <div><dt>Horário</dt><dd>{{ local.horario }}</dd></div>
+    </dl>
+
+    {% if local.status == 'ATIVO' %}
+    <div class="botoes margem-topo">
+        <a class="botao primario" href="{{ url_for('login') }}">Agendar</a>
+    </div>
+    {% endif %}
+
+    <a class="link-voltar" href="{{ url_for('site.locais') }}">← Todos os locais</a>
+</section>
+
+<section class="secao">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Campanhas</span>
+            <h2>Campanhas neste local</h2>
+        </div>
+    </div>
+    <div class="grade-cartoes">
+        {% for campanha in campanhas %}
+        {% include 'componentes/campanha_card.html' %}
+        {% else %}
+        <p class="texto-secundario">Nenhuma campanha cadastrada para este local no momento.</p>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

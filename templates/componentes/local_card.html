@@ -1,0 +1,23 @@
+{# Componente: cartão de local de coleta. Espera a variável "local". #}
+{% from 'componentes/status.html' import status_local %}
+<article class="cartao" id="local-{{ local.id }}">
+    <div class="card-topo">
+        <h3>{{ local.nome }}</h3>
+        {{ status_local(local.status) }}
+    </div>
+
+    <ul class="lista-dados">
+        <li>{{ local.endereco }} · {{ local.cidade }}/{{ local.estado }}</li>
+        <li>{{ local.telefone }}</li>
+        <li>{{ local.horario }}</li>
+    </ul>
+
+    <div class="card-acoes">
+        <a class="botao secundario" href="{{ url_for('site.local_detalhe', id_local=local.id) }}">Ver detalhes</a>
+        {% if local.status == 'ATIVO' %}
+        <a class="botao primario" href="{{ url_for('login') }}">Agendar</a>
+        {% else %}
+        <button class="botao" type="button" disabled>Agendar</button>
+        {% endif %}
+    </div>
+</article>

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block titulo %}Cadastro recebido | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cartao caixa-central">
+    <img src="{{ url_for('static', filename='img/gotinha.svg') }}" alt="" width="72" height="84">
+    <h1>Cadastro recebido</h1>
+    <p>
+        {% if nome %}Obrigado, {{ nome }}!{% else %}Obrigado!{% endif %}
+        Este é o passo de confirmação do autocadastro.
+    </p>
+    <p class="texto-secundario">
+        Nenhuma informação foi gravada. Esta tela é demonstrativa e será conectada ao banco de dados depois.
+    </p>
+    <div class="botoes">
+        <a class="botao primario" href="{{ url_for('login') }}">Entrar</a>
+        <a class="botao secundario" href="{{ url_for('site.inicio') }}">Voltar ao início</a>
+    </div>
+</section>
+
+{% endblock %}

@@ -59,6 +59,18 @@
                     Início
                 </a>
 
+                <a href="{{ url_for('site.campanhas') }}">
+                    Campanhas
+                </a>
+
+                <a href="{{ url_for('site.locais') }}">
+                    Locais
+                </a>
+
+                <a href="{{ url_for('site.autocadastro') }}">
+                    Autocadastro
+                </a>
+
                 <a class="sair" href="{{ url_for('login') }}">
                     Entrar
                 </a>
@@ -110,7 +122,10 @@
     <footer class="rodape">
         {% block rodape %}
         <p>
-            DoaSangue · Cadastro de Doadores de Sangue
+            <strong>DoaSangue</strong> · Cadastro de Doadores de Sangue
+        </p>
+        <p class="rodape-aviso">
+            A aptidão definitiva para a doação depende da triagem realizada pelo serviço de saúde.
         </p>
         {% endblock %}
     </footer>

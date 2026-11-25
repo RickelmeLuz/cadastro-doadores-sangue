@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %}Locais de coleta | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cabecalho-pagina">
+    <div>
+        <span class="identificador-pagina">Onde doar</span>
+        <h1>Locais de coleta</h1>
+        <p>Veja endereços, horários e situação de cada local.</p>
+    </div>
+</section>
+
+<div class="grade-cartoes">
+    {% for local in locais %}
+    {% include 'componentes/local_card.html' %}
+    {% endfor %}
+</div>
+
+{% endblock %}

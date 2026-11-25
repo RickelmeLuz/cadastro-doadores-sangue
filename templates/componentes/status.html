@@ -1,0 +1,17 @@
+{# Componente: etiquetas de situação. Sempre mostram o texto, nunca só a cor. #}
+
+{% macro status_campanha(valor) %}
+{% set classes = {
+    'ATIVA': 'status-sucesso',
+    'APROVADA': 'status-alerta',
+    'PENDENTE': 'status-alerta',
+    'ENCERRADA': 'status-neutro',
+    'RASCUNHO': 'status-neutro',
+    'CANCELADA': 'status-erro'
+} %}
+<span class="status {{ classes.get(valor, 'status-neutro') }}">{{ valor }}</span>
+{% endmacro %}
+
+{% macro status_local(valor) %}
+<span class="status {{ 'status-sucesso' if valor == 'ATIVO' else 'status-neutro' }}">{{ valor }}</span>
+{% endmacro %}

@@ -1,9 +1,85 @@
 {% extends 'base.html' %}
 {% block titulo %}Início | DoaSangue{% endblock %}
 {% block conteudo %}
-<section class="cartao" style="text-align: center;">
-    <img src="{{ url_for('static', filename='img/gotinha.svg') }}" alt="Gotinha, mascote da plataforma DoaSangue" width="120" height="140">
-    <h1>Doe sangue. Compartilhe vida.</h1>
-    <p>A página inicial completa será montada nas próximas etapas.</p>
+
+<section class="hero">
+    <div class="hero-texto">
+        <span class="etiqueta destaque">Cadastro e acompanhamento de doadores</span>
+        <h1><span class="hero-destaque">Doe</span> sangue.<br>Compartilhe vida.</h1>
+        <p class="hero-subtitulo">
+            Faça seu cadastro, acompanhe seu histórico e sua próxima data estimada,
+            conheça campanhas e encontre locais de coleta, tudo em um só lugar.
+        </p>
+        <div class="hero-botoes">
+            <a class="botao primario" href="{{ url_for('site.autocadastro') }}">Quero me cadastrar</a>
+            <a class="botao secundario" href="{{ url_for('login') }}">Entrar</a>
+        </div>
+    </div>
+    <div class="hero-visual">
+        <div class="hero-moldura">
+            <img src="{{ url_for('static', filename='img/gotinha.svg') }}" alt="Gotinha, mascote da plataforma DoaSangue" width="190" height="222">
+        </div>
+    </div>
 </section>
+
+<div class="alerta aviso">
+    <strong>Aviso:</strong> A aptidão definitiva para a doação depende da triagem realizada pelo serviço de saúde.
+</div>
+
+<section class="secao" id="campanhas">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Campanhas</span>
+            <h2>Campanhas em destaque</h2>
+        </div>
+        <a href="{{ url_for('site.campanhas') }}">Ver todas as campanhas →</a>
+    </div>
+    <div class="grade-cartoes">
+        {% for campanha in campanhas %}
+        {% include 'componentes/campanha_card.html' %}
+        {% endfor %}
+    </div>
+</section>
+
+<section class="secao" id="locais">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Onde doar</span>
+            <h2>Locais de coleta</h2>
+        </div>
+        <a href="{{ url_for('site.locais') }}">Ver todos os locais →</a>
+    </div>
+    <div class="grade-cartoes">
+        {% for local in locais %}
+        {% include 'componentes/local_card.html' %}
+        {% endfor %}
+    </div>
+</section>
+
+<section class="secao" id="como-funciona">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Cadastro</span>
+            <h2>Duas formas de se cadastrar</h2>
+        </div>
+    </div>
+    <div class="grade-cartoes">
+        <article class="cartao">
+            <h3 class="titulo-card">Autocadastro</h3>
+            <p class="texto-secundario">
+                Você mesmo cria seu cadastro com nome, CPF, contato e consentimento para o tratamento dos dados,
+                e depois acompanha tudo pelo seu painel.
+            </p>
+            <p>O tipo sanguíneo poderá ser registrado ou confirmado posteriormente no local de coleta.</p>
+        </article>
+        <article class="cartao">
+            <h3 class="titulo-card">Cadastro assistido</h3>
+            <p class="texto-secundario">
+                No local de coleta, um funcionário faz ou completa o seu cadastro, confirma o tipo sanguíneo
+                e registra a doação.
+            </p>
+        </article>
+    </div>
+</section>
+
 {% endblock %}

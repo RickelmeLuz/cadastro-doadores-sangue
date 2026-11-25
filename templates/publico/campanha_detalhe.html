@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% from 'componentes/status.html' import status_campanha %}
+{% block titulo %}{{ campanha.nome }} | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cartao">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Campanha</span>
+            <h1>{{ campanha.nome }}</h1>
+            <p>{{ campanha.descricao }}</p>
+        </div>
+        {{ status_campanha(campanha.status) }}
+    </div>
+
+    <dl class="detalhes">
+        <div><dt>Período</dt><dd>{{ campanha.data_inicio }} a {{ campanha.data_fim }}</dd></div>
+        <div><dt>Local</dt><dd>{{ campanha.local }}, {{ campanha.cidade }}/{{ campanha.estado }}</dd></div>
+        <div><dt>Tipo sanguíneo prioritário</dt><dd>{{ campanha.tipo_prioritario or 'Todos os tipos sanguíneos.' }}</dd></div>
+        <div><dt>Vagas</dt><dd>{{ campanha.vagas }}</dd></div>
+    </dl>
+
+    {% if campanha.status in ['ATIVA', 'APROVADA'] %}
+    <div class="botoes margem-topo">
+        <a class="botao primario" href="{{ url_for('site.autocadastro') }}">Tenho interesse</a>
+    </div>
+    {% endif %}
+
+    <a class="link-voltar" href="{{ url_for('site.campanhas') }}">← Todas as campanhas</a>
+</section>
+
+{% if campanha.parceiro %}
+<section class="cartao">
+    <span class="etiqueta destaque">Parceiro da campanha</span>
+
+    <div class="parceiro-detalhe">
+        <div class="parceiro-logo" role="img" aria-label="Espaço reservado para o logotipo do parceiro">
+            {{ campanha.parceiro.nome[0] }}
+        </div>
+        <div>
+            <h2>{{ campanha.parceiro.nome }}</h2>
+            <p class="texto-secundario">{{ campanha.parceiro.descricao }}</p>
+        </div>
+    </div>
+
+    <dl class="detalhes">
+        <div><dt>Promoção informada pelo parceiro</dt><dd>{{ campanha.parceiro.promocao }}</dd></div>
+        <div><dt>Período da promoção</dt><dd>{{ campanha.parceiro.periodo }}</dd></div>
+        <div class="campo-largo"><dt>Regras resumidas</dt><dd>{{ campanha.parceiro.regras }}</dd></div>
+    </dl>
+
+    <p class="margem-topo">
+        Realize sua doação durante o período da campanha e consulte no local de coleta a disponibilidade
+        do benefício divulgado pelo estabelecimento parceiro.
+    </p>
+    <p><strong>Benefício promocional divulgado pelo parceiro. Consulte regras e disponibilidade no local de coleta.</strong></p>
+
+    <div class="alerta aviso">
+        A emissão, entrega, validade e utilização de eventual benefício são de responsabilidade do
+        estabelecimento parceiro e do local de coleta participante.
+    </div>
+</section>
+{% endif %}
+
+{% endblock %}

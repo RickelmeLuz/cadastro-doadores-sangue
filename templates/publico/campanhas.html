@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block titulo %}Campanhas | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cabecalho-pagina">
+    <div>
+        <span class="identificador-pagina">Campanhas</span>
+        <h1>Campanhas de doação</h1>
+        <p>Conheça as campanhas e escolha onde e quando doar.</p>
+    </div>
+</section>
+
+<div class="grade-cartoes">
+    {% for campanha in campanhas %}
+    {% include 'componentes/campanha_card.html' %}
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block titulo %}Autocadastro | DoaSangue{% endblock %}
+{% block conteudo %}
+
+<section class="cartao caixa-formulario">
+    <div class="cabecalho-pagina">
+        <div>
+            <span class="identificador-pagina">Autocadastro</span>
+            <h1>Criar cadastro de doador</h1>
+            <p>Os campos com <span class="obrigatorio">*</span> são obrigatórios.</p>
+        </div>
+    </div>
+
+    <div class="alerta aviso">
+        <strong>Atenção:</strong> esta tela ainda não grava dados. Use apenas informações de teste.
+    </div>
+
+    <form method="post" class="grade-formulario">
+        <div class="campo-largo">
+            <label for="nome">Nome completo <span class="obrigatorio">*</span></label>
+            <input id="nome" name="nome" maxlength="120" autocomplete="name" required>
+        </div>
+        <div>
+            <label for="cpf">CPF <span class="obrigatorio">*</span></label>
+            <input id="cpf" name="cpf" maxlength="14" inputmode="numeric" placeholder="000.000.000-00" required>
+        </div>
+        <div>
+            <label for="data_nascimento">Data de nascimento <span class="obrigatorio">*</span></label>
+            <input id="data_nascimento" name="data_nascimento" type="date" required>
+        </div>
+        <div>
+            <label for="email">E-mail <span class="obrigatorio">*</span></label>
+            <input id="email" name="email" type="email" maxlength="150" autocomplete="email" required>
+        </div>
+        <div>
+            <label for="whatsapp">WhatsApp <span class="obrigatorio">*</span></label>
+            <input id="whatsapp" name="whatsapp" type="tel" maxlength="20" autocomplete="tel" placeholder="(00) 00000-0000" required>
+        </div>
+        <div>
+            <label for="cidade">Cidade <span class="obrigatorio">*</span></label>
+            <input id="cidade" name="cidade" maxlength="100" required>
+        </div>
+        <div>
+            <label for="estado">UF <span class="obrigatorio">*</span></label>
+            <input id="estado" name="estado" maxlength="2" value="PI" required>
+        </div>
+        <div>
+            <label for="senha">Senha <span class="obrigatorio">*</span></label>
+            <input id="senha" name="senha" type="password" autocomplete="new-password" required>
+        </div>
+        <div>
+            <label for="confirmacao_senha">Confirmação da senha <span class="obrigatorio">*</span></label>
+            <input id="confirmacao_senha" name="confirmacao_senha" type="password" autocomplete="new-password" required>
+        </div>
+
+        <label class="consentimento campo-largo">
+            <input name="notificacao_email" type="checkbox">
+            Autorizo o recebimento de notificações por e-mail.
+        </label>
+        <label class="consentimento campo-largo">
+            <input name="notificacao_whatsapp" type="checkbox">
+            Autorizo o recebimento de notificações por WhatsApp.
+        </label>
+        <label class="consentimento campo-largo">
+            <input name="consentimento" type="checkbox" required>
+            Autorizo o tratamento dos meus dados pessoais para o cadastro e o acompanhamento das doações.
+            <span class="obrigatorio">*</span>
+        </label>
+
+        <p class="ajuda campo-largo">
+            O tipo sanguíneo poderá ser registrado ou confirmado posteriormente no local de coleta.
+        </p>
+
+        <div class="campo-largo botoes">
+            <button class="botao primario" type="submit">Criar cadastro</button>
+            <a class="botao claro" href="{{ url_for('site.inicio') }}">Cancelar</a>
+        </div>
+    </form>
+</section>
+
+{% endblock %}
